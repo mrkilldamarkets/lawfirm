@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sign in — Adderley Moss</title><meta name="theme-color" content="#0d0d0c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%236e0f0a'/%3E%3Ctext x='20' y='25' text-anchor='middle' font-family='Georgia' font-size='13' fill='%23f4e4d4'%3EAM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/css/fonts.css"><link rel="stylesheet" href="/css/app.css">
+<style>
+  .auth__art { background: #0d0d0c; }
+  .auth__art h1 { position: relative; font: 400 clamp(48px, 5.6vw, 88px)/.95 'Libre Caslon Display', Georgia, serif; letter-spacing: -.01em; color: #f4f2ec; }
+  .auth__art h1 del { text-decoration: none; position: relative; color: #85837b; } .auth__art h1 del::after { content: ''; position: absolute; left: -2%; right: -2%; top: 52%; height: 3px; background: #d32a1f; transform: rotate(-2deg); }
+  .auth__art h1 ins { text-decoration: none; color: #ff6a5c; font-style: italic; font-family: 'EB Garamond Variable', 'EB Garamond', Georgia, serif; }
+  .auth__art .rule { position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: repeating-linear-gradient(0deg, transparent 0 31px, rgba(244,242,236,.06) 31px 32px); pointer-events: none; }
+  .auth__art .margin { position: absolute; top: 0; bottom: 0; left: 64px; width: 1px; background: rgba(211,42,31,.5); }
+  .demo-g { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; } .demo-g .btn { justify-content: flex-start; text-align: left; height: auto; padding: 10px 14px; } .demo-g .btn small { display: block; font-weight: 500; color: var(--mute); font-size: 11.5px; }
+  @media (max-width: 520px) { .demo-g { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="auth">
+  <section class="auth__art">
+    <div class="margin" aria-hidden="true"></div><div class="rule" aria-hidden="true"></div>
+    <a href="/" style="position:relative;display:flex;align-items:center;gap:12px;color:#f4f2ec;text-decoration:none"><b style="font:400 18px/1 'Libre Caslon Display',Georgia,serif;letter-spacing:.32em">ADDERLEY MOSS</b></a>
+    <h1><del>Heretofore</del><br><ins>Sign in.</ins></h1>
+    <p style="position:relative;color:#bdb9ad;max-width:46ch">Counsel use the practice console: matters, the clock, court deadlines, billing and the client trust ledger. Clients use the secure portal: matter progress, documents to sign, messages, invoices and KYC.</p>
+  </section>
+  <section class="auth__form"><div class="auth__card">
+    <h2 style="font:400 30px/1.1 'Libre Caslon Display',Georgia,serif;margin-bottom:18px">Practice &amp; client portal</h2>
+    <form class="form" id="login">
+      <label class="field"><span>Email</span><input class="input" name="email" type="email" autocomplete="username" required></label>
+      <label class="field"><span>Password</span><input class="input" name="password" type="password" autocomplete="current-password" required></label>
+      <button class="btn btn--heat btn--lg btn--block">Sign in</button>
+      <p class="muted" style="font-size:13px">Clients receive portal access by email when a matter opens. New here? <a href="/#instruct">Send an enquiry</a>.</p>
+    </form>
+    <p id="err" role="alert" style="min-height:1.3em;color:var(--coral-2);font-weight:600;font-size:14px;text-align:center;margin-top:10px"></p>
+    <div id="demo" style="display:none;margin-top:14px;padding-top:18px;border-top:1px solid var(--line)">
+      <p class="mono muted" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Demo accounts</p>
+      <div class="demo-g">
+        <button class="btn" data-demo="cadderley@adderleymoss.bs:am-partner">Cassandra Adderley<small>Managing partner · everything</small></button>
+        <button class="btn" data-demo="jmoss@adderleymoss.bs:am-partner">Julian Moss<small>Partner · litigation, clock running</small></button>
+        <button class="btn" data-demo="drolle@adderleymoss.bs:am-associate">Desmond Rolle<small>Associate · own matters</small></button>
+        <button class="btn" data-demo="tferguson@adderleymoss.bs:am-paralegal">Tamika Ferguson<small>Paralegal · time &amp; filings</small></button>
+        <button class="btn" data-demo="accounts@adderleymoss.bs:am-accounts">Accounts<small>Billing &amp; client trust</small></button>
+        <button class="btn" data-demo="reception@adderleymoss.bs:am-reception">Reception<small>Enquiries &amp; diary</small></button>
+        <button class="btn" data-demo="client@adderleymoss.bs:am-client" style="grid-column:1/-1">Harbourline Holdings Ltd.<small>Client portal · Daniel Strachan</small></button>
+      </div>
+    </div>
+  </div></section>
+</div>
+<script src="/js/core.js"></script>
+<script>
+const { $, $$, api } = NC;
+const next = new URLSearchParams(location.search).get('next') || '';
+const home = (r) => (r === 'client' ? '/portal' : '/console');
+const go = (role) => { const h = home(role); location.href = next && next.startsWith(h) ? next : h; };
+api('/api/me').then((m) => go(m.role)).catch(() => {});
+fetch('/api/config').then((r) => r.json()).then((c) => { if (c.demo) $('#demo').style.display = 'block'; }).catch(() => {});
+async function login(email, password) { $('#err').textContent = ''; try { const r = await api('/api/auth/login', { email, password }); go(r.role); } catch (e) { $('#err').textContent = e.message; } }
+$('#login').onsubmit = (e) => { e.preventDefault(); const f = new FormData(e.target); login(f.get('email'), f.get('password')); };
+$$('[data-demo]').forEach((b) => (b.onclick = () => { const [e, p] = b.dataset.demo.split(':'); $('[name=email]').value = e; $('[name=password]').value = p; login(e, p); }));
+</script>
+</body>
+</html>

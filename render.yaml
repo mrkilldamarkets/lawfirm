@@ -1,0 +1,27 @@
+# Render Blueprint — Dashboard → New → Blueprint → pick this repo.
+# Free plan: the app sleeps after ~15 min idle (first visit then takes ~1 min to wake),
+# and the SQLite database resets to fresh demo data on every restart or deploy.
+# For a real firm: switch to a paid plan, uncomment the disk, set SHOW_DEMO_LOGINS to "false",
+# and set OWNER_PASSWORD before the first boot.
+services:
+  - type: web
+    name: adderley-moss
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: SHOW_DEMO_LOGINS
+        value: "true"
+      # OWNER_PASSWORD: set your own before real use — the demo managing-partner button needs the default.
+      # PUBLIC_URL is not needed: payment and signing links are relative to the site.
+    # disk:
+    #   name: adderley-data
+    #   mountPath: /var/data
+    # (then add envVar DATA_DIR=/var/data)
