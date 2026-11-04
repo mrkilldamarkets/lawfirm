@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adderley Moss</title><meta name="robots" content="noindex"><meta name="theme-color" content="#f4f2ec">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%238e1a12'/%3E%3Ctext x='20' y='26' font-family='Georgia' font-size='15' text-anchor='middle' fill='%23f4f2ec'%3EAM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/css/fonts.css"><link rel="stylesheet" href="/css/site.css">
+<style>
+  .gw { max-width: 980px; margin: 0 auto; padding: 46px var(--gut) 90px; }
+  .paper { background: var(--white); padding: clamp(24px, 5vw, 64px); box-shadow: 0 1px 0 var(--hair), 0 40px 80px -50px rgba(0, 0, 0, .5); position: relative; margin-top: 26px; }
+  .paper__h { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 16px; }
+  .paper__h b { font: 400 24px/1 var(--fd); letter-spacing: .12em; } .paper__h small { display: block; font: 400 11px var(--fm); text-transform: uppercase; color: var(--mute); margin-top: 6px; }
+  .doc-body { font: 400 19px/1.65 var(--fs); white-space: pre-wrap; margin-top: 26px; }
+  .sigpad { width: 100%; height: 170px; display: block; background: repeating-linear-gradient(transparent 0 139px, var(--ink) 139px 140px, transparent 140px); border: 1px dashed var(--hair); touch-action: none; cursor: crosshair; }
+  .cert { margin-top: 26px; border: 1.5px solid var(--ink); padding: 18px; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; font: 400 13px var(--fm); } .cert dt { color: var(--mute); text-transform: uppercase; } .cert img { max-height: 70px; }
+  .stamp { position: absolute; top: 34px; right: 34px; transform: rotate(-8deg); border: 3px double var(--red); color: var(--red); font: 700 14px var(--fm); padding: 8px 14px; letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+  .atts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border-top: 1px solid var(--ink); } .att { all: unset; box-sizing: border-box; cursor: pointer; padding: 18px 16px 18px 0; border-bottom: 1px solid var(--hair); } .att[aria-checked='true'] h3 { color: var(--red); } .att[aria-checked='true'] .s { color: var(--red); }
+  .att .s { font: 400 44px/1 var(--sig); color: var(--blue); height: 50px; } .att h3 { font: 400 22px var(--fd); margin-top: 6px; } .att p { font: 400 11.5px var(--fm); text-transform: uppercase; color: var(--ink-2); margin-top: 4px; }
+  .days { display: flex; gap: 0; overflow-x: auto; border: 1px solid var(--ink); margin-top: 8px; } .day { flex: 1 0 74px; border: 0; border-right: 1px solid var(--hair); background: none; padding: 10px 6px; cursor: pointer; display: grid; justify-items: center; } .day small { font: 400 10.5px var(--fm); text-transform: uppercase; color: var(--mute); } .day b { font: 400 28px/1.1 var(--fd); } .day[aria-checked='true'] { background: var(--ink); color: var(--paper); } .day[aria-checked='true'] small { color: #ff6a5c; }
+  .slots { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; min-height: 40px; } .slot { border: 1.5px solid var(--ink); background: none; border-radius: 999px; padding: 8px 14px; font: 400 14px var(--fm); cursor: pointer; } .slot[aria-checked='true'] { background: var(--red); border-color: var(--red); color: #fff; }
+  .docket { display: grid; grid-template-columns: 160px 1fr; border-top: 2px solid var(--ink); margin-top: 18px; } .docket dt, .docket dd { padding: 12px 0; border-bottom: 1px solid var(--hair); margin: 0; } .docket dt { font: 400 11.5px var(--fm); text-transform: uppercase; color: var(--mute); } .docket dd { font: 400 20px/1.3 var(--fs); }
+  .steps3 { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); margin-top: 26px; } .steps3 div { padding: 14px 14px 14px 0; } .steps3 div + div { padding-left: 14px; border-left: 1px solid var(--hair); } .steps3 b { display: block; font: 700 12px var(--fm); color: var(--red); } .steps3 .on { color: var(--ink); } .steps3 p { font: 400 17px/1.35 var(--fs); margin-top: 6px; }
+  table.inv { width: 100%; border-collapse: collapse; margin-top: 22px; font-size: 14px; } .inv th { text-align: left; font: 400 11px var(--fm); text-transform: uppercase; color: var(--mute); border-bottom: 1.5px solid var(--ink); padding: 8px 6px; } .inv td { padding: 9px 6px; border-bottom: 1px solid var(--hair); vertical-align: top; } .inv .r { text-align: right; font-family: var(--fm); white-space: nowrap; }
+  .tots { margin-left: auto; width: min(360px, 100%); margin-top: 16px; } .tots div { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14.5px; } .tots div b { font: 400 14px var(--fm); } .tots .g { border-top: 2px solid var(--ink); border-bottom: 3px double var(--ink); padding: 10px 0; font-weight: 700; } .tots .g b { font: 400 28px var(--fd); }
+  @media (max-width: 620px) { .steps3 { grid-template-columns: 1fr; } .steps3 div + div { padding-left: 0; border-left: 0; } .docket { grid-template-columns: 1fr; } .docket dt { border: 0; padding-bottom: 0; } .stamp { position: static; display: inline-block; margin-bottom: 14px; } }
+</style>
+</head>
+<body>
+<header class="mast"><div class="mast__in" style="grid-template-columns:1fr auto 1fr"><span class="meta" id="ref"></span><a class="brand" href="/"><b>ADDERLEY MOSS</b><small>Counsel &amp; Attorneys-at-Law</small></a><div class="mast__r"><a class="pill pill--line pill--sm" href="/portal">Client login</a></div></div></header>
+<main class="gw" id="main"><p class="meta">Loading…</p></main>
+<script src="/js/core.js"></script>
+<script>
+(async () => {
+  const { $, $$, esc, api, sigPad } = NC; const main = $('#main');
+  const money = (c) => 'B$' + ((c || 0) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const [, kind, token] = location.pathname.split('/'); const gone = (m) => (main.innerHTML = `<p class="clause">§ —</p><h1 class="d2" style="margin-top:14px">This link is <span class="it">no longer valid.</span></h1><p class="lede" style="margin-top:14px">${esc(m)} Please call chambers on (242) 555-0114.</p>`);
+  const fmt = (s) => new Date(s.replace(' ', 'T')).toLocaleString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit' });
+
+  // ------------------------------------------------------------ ENQUIRY
+  async function intake() {
+    let i; try { i = await api('/api/public/intake/' + token); } catch (e) { return gone(e.message); }
+    $('#ref').textContent = `Enquiry ${i.number}`; document.title = `Enquiry ${i.number} — Adderley Moss`;
+    const step = { conflict_review: 0, new: 0, cleared: 1, consult_booked: 2, converted: 2 }[i.status] ?? 0;
+    const head = `<p class="clause">§ ${i.number}</p><h1 class="d2" style="margin-top:14px">${i.status === 'declined' ? 'We can’t act <span class="it">on this one.</span>' : i.status === 'conflict_review' ? 'Checking our records <span class="it">by hand.</span>' : i.status === 'consult_booked' ? 'You’re in <span class="it">the diary.</span>' : i.status === 'converted' ? 'Welcome, <span class="it">client.</span>' : 'No conflict. <span class="it">Choose your attorney.</span>'}</h1>
+      <div class="steps3"><div class="${step >= 0 ? 'on' : ''}"><b>01 · Conflict check</b><p>${i.status === 'conflict_review' ? 'A partner is reviewing a possible name match.' : i.status === 'declined' ? 'Not cleared.' : 'Cleared — no conflict found.'}</p></div><div class="${step >= 1 ? 'on' : ''}"><b>02 · Consultation</b><p>${i.consult_at ? fmt(i.consult_at) : 'Choose an attorney and a time.'}</p></div><div class="${step >= 2 ? 'on' : ''}"><b>03 · Engagement</b><p>${i.status === 'converted' ? 'Engagement letter issued.' : 'Scope and fees confirmed in writing.'}</p></div></div>`;
+    if (i.status === 'declined') { main.innerHTML = head + `<p class="lede" style="margin-top:26px">Thank you for contacting us, ${esc(i.name.split(' ')[0])}. We are unable to act in this matter. Please take independent advice promptly — some claims have strict time limits. We have not used or kept any information about your matter beyond the names you gave us.</p>`; return; }
+    if (i.status === 'conflict_review') { main.innerHTML = head + `<p class="lede" style="margin-top:26px">One of the names you gave us is similar to a name in our records. That happens often and usually means nothing — but we check every possible match by hand before anyone discusses your matter. A partner will contact you within one business day.</p><p class="fine" style="margin-top:14px">Please don’t send us further details until we confirm.</p>`; return; }
+    if (i.status === 'converted') { main.innerHTML = head + `<p class="lede" style="margin-top:26px">Your engagement letter has been sent for e-signature, and your secure client portal is being set up.</p><p style="margin-top:22px"><a class="pill pill--red" href="/portal">Go to the client portal <i>→</i></a></p>`; return; }
+    if (i.status === 'consult_booked') {
+      main.innerHTML = head + `<dl class="docket"><dt>With</dt><dd>${esc(i.consult_with?.name || '')}, ${esc(i.consult_with?.title || '')}</dd><dt>When</dt><dd>${esc(fmt(i.consult_at))} · 60 minutes</dd><dt>Where</dt><dd>${i.consult_mode === 'video' ? 'Secure video — the link arrives by email an hour before' : esc(i.firm.address)}</dd><dt>Fee</dt><dd>${i.consult_fee_cents ? money(i.consult_fee_cents) + ' — paid. Credited to your first bill if you instruct us.' : 'Complimentary'}</dd><dt>Bring</dt><dd>Photo ID, and any letters, contracts or court papers — originals or copies.</dd></dl>
+        <p style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap"><button class="pill pill--ink" id="ics">Add to calendar</button><a class="pill pill--line" href="/">Back to the firm</a></p>`;
+      $('#ics').onclick = () => { const z = (s) => s.replace(/[-: ]/g, '').slice(0, 15), end = new Date(new Date(i.consult_at.replace(' ', 'T')).getTime() + 36e5); const e = z(i.consult_at.slice(0, 11) + end.toTimeString().slice(0, 8));
+        Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Adderley Moss//EN\r\nBEGIN:VEVENT\r\nUID:${token}@adderleymoss\r\nDTSTART;TZID=America/Nassau:${z(i.consult_at)}\r\nDTEND;TZID=America/Nassau:${e}\r\nSUMMARY:Consultation — Adderley Moss\r\nLOCATION:${i.consult_mode === 'video' ? 'Video' : i.firm.address}\r\nEND:VEVENT\r\nEND:VCALENDAR`], { type: 'text/calendar' })), download: 'adderley-moss-consultation.ics' }).click(); };
+      return;
+    }
+    // cleared → choose attorney, day, time, mode, pay
+    const S = { user: i.attorneys[0]?.id, date: null, time: null, mode: 'in_person' }, days = []; for (let k = 1; days.length < 10; k++) { const d = new Date(Date.now() + k * 864e5); if (![0, 6].includes(d.getDay())) days.push(d); }
+    main.innerHTML = head + `<p class="lede" style="margin-top:26px">${esc(i.area_name)} — these attorneys handle matters like yours. Consultations last an hour, in chambers or by secure video.</p>
+      <p class="meta" style="margin-top:30px">Attorney</p><div class="atts" role="radiogroup">${i.attorneys.map((a, k) => `<button class="att" role="radio" aria-checked="${!k}" data-u="${a.id}"><div class="s">${esc(a.name)}</div><h3>${esc(a.name)}</h3><p>${esc(a.title)}${a.bar_year ? ' · called ' + a.bar_year : ''}</p></button>`).join('')}</div>
+      <p class="meta" style="margin-top:28px">Day</p><div class="days" role="radiogroup">${days.map((d) => `<button class="day" role="radio" aria-checked="false" data-d="${d.toISOString().slice(0, 10)}"><small>${d.toLocaleDateString('en-GB', { weekday: 'short' })}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString('en-GB', { month: 'short' })}</small></button>`).join('')}</div>
+      <div class="slots" id="slots"><p class="fine">Choose a day.</p></div>
+      <form class="form" id="bf" style="margin-top:26px"><div class="seg" role="radiogroup"><button type="button" role="radio" aria-checked="true" data-m="in_person">In chambers</button><button type="button" role="radio" aria-checked="false" data-m="video">Secure video</button></div>
+        ${i.consult_fee_cents ? `<label class="field"><span>Card for the ${money(i.consult_fee_cents)} consultation fee</span><input name="card" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242"></label><p class="fine">Credited against your first bill if you instruct us. Demo payments: 4242… succeeds, 4000… declines.</p>` : '<p class="fine">Your first consultation is complimentary.</p>'}
+        <p class="err" role="alert"></p><div><button class="pill pill--red pill--lg" id="go" disabled>Confirm consultation <i>→</i></button></div></form>`;
+    const load = async () => { S.time = null; $('#go').disabled = true; if (!S.date) return; const r = await api(`/api/public/consult-slots?user_id=${S.user}&date=${S.date}`); $('#slots').innerHTML = r.length ? r.map((t) => `<button type="button" class="slot" role="radio" aria-checked="false" data-t="${t}">${t}</button>`).join('') : '<p class="fine">Fully booked — try another day.</p>'; $$('.slot').forEach((b) => (b.onclick = () => { S.time = b.dataset.t; $$('.slot').forEach((x) => x.setAttribute('aria-checked', x === b)); $('#go').disabled = false; })); };
+    $$('.att').forEach((b) => (b.onclick = () => { S.user = Number(b.dataset.u); $$('.att').forEach((x) => x.setAttribute('aria-checked', x === b)); load(); }));
+    $$('.day').forEach((b) => (b.onclick = () => { S.date = b.dataset.d; $$('.day').forEach((x) => x.setAttribute('aria-checked', x === b)); load(); })); $('.day').click();
+    $$('[data-m]').forEach((b) => (b.onclick = () => { S.mode = b.dataset.m; $$('[data-m]').forEach((x) => x.setAttribute('aria-checked', x === b)); }));
+    $('#bf').onsubmit = async (e) => { e.preventDefault(); const err = $('.err'); err.textContent = ''; try { await api(`/api/public/intake/${token}/book`, { user_id: S.user, date: S.date, time: S.time, mode: S.mode, card: e.target.card?.value }); scrollTo(0, 0); intake(); } catch (er) { err.textContent = er.message; if (/taken/.test(er.message)) load(); } };
+  }
+
+  // ------------------------------------------------------------ SIGN
+  async function sign() {
+    let d; try { d = await api('/api/public/sign/' + token); } catch (e) { return gone(e.message); }
+    $('#ref').textContent = d.matter_no || ''; document.title = `${d.name} — Adderley Moss`;
+    main.innerHTML = `<p class="clause">§ For signature</p><h1 class="d2" style="margin-top:14px">${esc(d.name)}</h1>
+      <article class="paper">${d.status === 'signed' ? '<span class="stamp">Executed</span>' : ''}<div class="paper__h"><div><b>ADDERLEY MOSS</b><small>Counsel &amp; Attorneys-at-Law</small></div><div class="meta" style="text-align:right">${esc(d.matter_no || '')}<br>Doc hash ${esc(d.hash)}</div></div><div class="doc-body">${esc(d.body)}</div>
+        ${d.status === 'signed' ? `<dl class="cert"><dt>Signed by</dt><dd>${esc(d.signer_name)}</dd><dt>Signed at</dt><dd>${esc(d.signed_at)} (Nassau)</dd><dt>Method</dt><dd>Electronic signature via secure link</dd><dt>Document hash</dt><dd>${esc(d.hash)}</dd></dl>`
+        : `<form class="form" id="sf" style="margin-top:34px"><p class="meta">Sign here</p><canvas class="sigpad" id="pad"></canvas><div style="display:flex;gap:10px;align-items:center"><button type="button" class="pill pill--line pill--sm" id="clr">Clear</button><span class="fine">Draw with your finger, mouse or stylus.</span></div>
+          <label class="field"><span>Full name</span><input name="name" autocomplete="name" value="${esc(d.signer_name || '')}"></label><label class="chk"><input type="checkbox" name="agree"> I have read this document and agree to sign it electronically.</label><p class="err" role="alert"></p><div><button class="pill pill--red pill--lg">Sign &amp; execute <i>→</i></button></div></form>`}</article>`;
+    const f = $('#sf'); if (!f) return; const pad = sigPad($('#pad')); $('#clr').onclick = () => pad.clear();
+    f.onsubmit = async (e) => { e.preventDefault(); try { await api('/api/public/sign/' + token, { name: f.name.value, signature: pad.data(), agree: f.agree.checked }); scrollTo(0, 0); sign(); } catch (er) { $('.err', f).textContent = er.message; } };
+  }
+
+  // ------------------------------------------------------------ PAY
+  async function pay() {
+    let v; try { v = await api('/api/public/pay/' + token); } catch (e) { return gone(e.message); }
+    $('#ref').textContent = v.number; document.title = `Invoice ${v.number} — Adderley Moss`;
+    const paid = v.balance_cents <= 0;
+    main.innerHTML = `<p class="clause">§ Invoice</p><h1 class="d2" style="margin-top:14px">${paid ? 'Paid in full. <span class="it">Thank you.</span>' : `${money(v.balance_cents)} <span class="it">due ${new Date(v.due_on + 'T12:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}.</span>`}</h1>
+      <article class="paper">${paid ? '<span class="stamp">Paid</span>' : ''}<div class="paper__h"><div><b>ADDERLEY MOSS</b><small>${esc(v.firm.address)}</small></div><div class="meta" style="text-align:right">Invoice ${esc(v.number)}<br>Issued ${esc(v.issued_on)}<br>VAT reg. 100-200-300</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px"><div><p class="meta">Bill to</p><p class="serif" style="font-size:19px">${esc(v.client)}</p></div><div><p class="meta">Matter</p><p class="serif" style="font-size:19px">${esc(v.matter_no)} — ${esc(v.matter_title)}</p></div></div>
+        <table class="inv"><thead><tr><th>Date</th><th>Description</th><th>By</th><th class="r">Hours</th><th class="r">Amount</th></tr></thead><tbody>${v.lines.map((l) => `<tr><td class="mono" style="font-size:12.5px">${esc(l.date || '')}</td><td>${esc(l.description || '')}</td><td>${esc((l.user || '').split(' ').map((w) => w[0]).join(''))}</td><td class="r">${l.minutes ? (l.minutes / 60).toFixed(1) : ''}</td><td class="r">${money(l.amount_cents)}</td></tr>`).join('')}</tbody></table>
+        <div class="tots"><div><span>Professional fees</span><b>${money(v.fees_cents - v.discount_cents)}</b></div>${v.expenses_cents ? `<div><span>Disbursements &amp; expenses</span><b>${money(v.expenses_cents)}</b></div>` : ''}<div><span>VAT 10%</span><b>${money(v.vat_cents)}</b></div><div class="g"><span>Total</span><b>${money(v.total_cents)}</b></div>${v.payments.map((p) => `<div><span>${p.from_trust ? 'Paid from client account' : 'Paid · ' + esc(p.method)} ${esc(p.date)}</span><b>−${money(p.amount_cents)}</b></div>`).join('')}${v.written_off_cents ? `<div><span>Courtesy adjustment</span><b>−${money(v.written_off_cents)}</b></div>` : ''}<div class="g"><span>Balance due</span><b>${money(v.balance_cents)}</b></div></div>
+        ${paid ? '' : `<form class="form" id="pf" style="margin-top:30px;max-width:460px"><label class="field"><span>Card</span><input name="card" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242"></label><p class="err" role="alert"></p><div><button class="pill pill--red pill--lg">Pay ${money(v.balance_cents)} <i>→</i></button></div><p class="fine">Or pay by wire to our office account; quote ${esc(v.number)}. Demo payments: 4242… succeeds, 4000… declines.</p></form>`}</article>`;
+    const f = $('#pf'); if (f) f.onsubmit = async (e) => { e.preventDefault(); try { await api('/api/public/pay/' + token, { card: f.card.value }); scrollTo(0, 0); pay(); } catch (er) { $('.err', f).textContent = er.message; } };
+  }
+  ({ i: intake, sign, pay })[kind]?.();
+})();
+</script>
+</body>
+</html>
