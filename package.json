@@ -1,0 +1,26 @@
+{
+  "name": "adderley-moss",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ADDERLEY MOSS — law firm website, client portal and practice management (conflicts, time, billing, trust accounting)",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node --no-warnings server/index.js",
+    "dev": "node --no-warnings --watch server/index.js",
+    "seed": "node --no-warnings server/seed.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "@fontsource-variable/eb-garamond": "^5.3.0",
+    "@fontsource-variable/schibsted-grotesk": "^5.3.0",
+    "@fontsource/courier-prime": "^5.3.0",
+    "@fontsource/libre-caslon-display": "^5.3.0",
+    "@fontsource/mrs-saint-delafield": "^5.3.0",
+    "compression": "^1.8.2",
+    "express": "^4.22.3",
+    "gsap": "^3.15.1",
+    "three": "^0.187.0"
+  }
+}
